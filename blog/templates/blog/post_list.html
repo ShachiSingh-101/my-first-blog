@@ -1,38 +1,14 @@
-<html>
-    <head>
-        <title>Django Girls blog</title>
-        <style>
-            div {
-              background-color:purple;
-              opacity: 0.6;
-              color:white;
-              font: italic bold 20px/30px Georgia, serif;
-              text-align: center;
-              border-style: dotted;
-              border-color: blue;
-              border-radius: 15px;
-              border-width: thick;
-              margin-top: 50px;
-              margin-bottom: 50px;
-              margin-right: 150px;
-              margin-left: 80px;
-              
-            }
-        </style>            
-    </head>
-    <body>
-        <div>
-            <h1><a href="/"style="color:Tomato;"font-size: 40px;>Django Girls Blog</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        <div>
-            {% for post in posts %}
-                <div>
-                    <p>published: {{ post.published_date }}</p>
-                    <h2><a href="">{{ post.title }}</a></h2>
-                    <p>{{ post.text|linebreaksbr }}</p>
-                </div>
-            {% endfor %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
         </div>
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}
